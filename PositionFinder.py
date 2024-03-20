@@ -4,7 +4,6 @@ from selenium.webdriver.chrome.options import Options
 import time
 import utils
 
-
 options = Options()
 # options.add_argument("--headless=new")
 

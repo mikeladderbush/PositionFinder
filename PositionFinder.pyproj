@@ -21,12 +21,14 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="exceptions.py" />
+    <Compile Include="Exceptions.py" />
     <Compile Include="PositionFinder.py" />
+    <Compile Include="SpecificQuestions.py" />
+    <Compile Include="UtilTests.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />
-    <Content Include="utils.py" />
+    <Content Include="Utils.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

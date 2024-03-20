@@ -3,13 +3,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import exceptions
 import time
+import SpecificQuestions
 
 
+# Accept new parameter for potential XPath values.
+# bachelors_degree = driver.find_element(By.XPATH,"//*[text()[contain(., 'A Bachelor')]")
+# search for text and then use that to determine paths, look below at software/developer search line. Optimize later
 def sign_in (driver):
 
     try:
-        
-        sign_in = driver.find_element(By.XPATH, '//*[@id="signin-link"]')
+        sign_in = driver.find_element(By.XPATH, '//*[text()="Sign In"]')
         sign_in.click()
         time.sleep(1)
 
@@ -35,11 +38,11 @@ def sign_in (driver):
         
      
         
-
+# Accept new parameter for potential XPath values.
 def set_filters(driver):
     
     try:
-        
+        # Replace Magic variables
         location_check_box = driver.find_element(By.XPATH, '//*[@id="LOCATION-content"]/div[2]/div[3]/a/label/div')
         location_check_box.click()
         time.sleep(2)
@@ -65,10 +68,12 @@ def set_filters(driver):
         pass
 
 
+
+# Accept new parameter for potential XPath values.
 def get_jobs(driver):
             
     try:
-        
+        # Replace Magic variables
         position_elements = driver.find_elements(By.TAG_NAME, 'a')    
         
     except Exception:
@@ -90,13 +95,14 @@ def get_jobs(driver):
             
 
 
+# Accept new parameter for potential XPath values.
 def switch_to_and_apply(driver, window):
     
     driver._switch_to.window(window)
     time.sleep(2)
 
     try:
-        
+        # Replace Magic variables
         apply = driver.find_element(By.XPATH, '//*[@id="requisitionDescriptionInterface.UP_APPLY_ON_REQ.row1"]')
         apply.click()
     
@@ -109,7 +115,7 @@ def switch_to_and_apply(driver, window):
 
     match application_step_text:
             
-        case 'Step 1 out of 10':
+        case 'Step 1 out of 10' | 'Step 1 out of 9':
                 
             try:
                     
@@ -119,21 +125,29 @@ def switch_to_and_apply(driver, window):
                 job_board = driver.find_element(By.XPATH, '//*[@id="et-ef-content-ftf-gp-j_id_id16pc9-page_2-sourceTrackingBlock-recruitmentSourceType"]/option[6]')
                 job_board.click()
             
-                board_selection = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[4]/table/tbody/tr/td[1]/span[6]/span[3]/span[3]/span[1]/select')
+                time.sleep(2)
+                
+                board_selection = driver.find_element(By.XPATH, '//*[@id="recruitmentSourceDP"]')
                 board_selection.click()
 
                 indeed = driver.find_element(By.XPATH, '//*[@id="recruitmentSourceDP"]/option[9]')
                 indeed.click()
 
+                time.sleep(2)
+                
                 save_and_continue = driver.find_element(By.XPATH, '//*[@id="et-ef-content-ftf-saveContinueCmdBottom"]')
                 save_and_continue.click()
+                
+                time.sleep(3)
+                window = driver.current_window_handle
+                switch_to_and_apply(driver, window)
                     
             except Exception:
                     
-                raise exceptions.ApplicationStepException('Step 1', 'Unable to complete')
+                raise exceptions.ApplicationStepException('Step 1', 'Unable to complete basic information')
 
         
-        case 'Step 2 out of 10':
+        case 'Step 2 out of 10' | 'Step 2 out of 9':
                 
             try:
                     
@@ -141,72 +155,92 @@ def switch_to_and_apply(driver, window):
                 save_question = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[5]/span[1]/span/span[1]/input[1]')
                 save_question.click()
                     
+                time.sleep(3)
+                window = driver.current_window_handle
+                switch_to_and_apply(driver, window)
+
             except Exception:
                     
-                raise exceptions.ApplicationStepException('Step 2', 'Unable to complete')
+                raise exceptions.ApplicationStepException('Step 2', 'Unable to complete general questions')
     
         case 'Step 3 out of 10':
                 
             try:
                     
-                specific_questions(driver)
+                SpecificQuestions.break_down_questions(driver)
                 save_and_continue = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[5]/span[1]/span/span[1]/input[1]')
                 save_and_continue.click()
+                    
+                time.sleep(3)
+                window = driver.current_window_handle
+                switch_to_and_apply(driver, window)
                     
             except Exception:
                     
-                raise exceptions.ApplicationStepException('Step 3', 'Unable to complete')
+                raise exceptions.ApplicationStepException('Step 3', 'Unable to complete specific questions')
 
 
-        case 'Step 4 out of 10':
+        case 'Step 4 out of 10' | 'Step 3 out of 9':
                 
             try:
                     
-                specific_questions(driver)
                 save_and_continue = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[5]/span[1]/span/span[1]/input[1]')
                 save_and_continue.click()
                     
+                time.sleep(3)
+                window = driver.current_window_handle
+                switch_to_and_apply(driver, window)
+
             except Exception:
                     
-                raise exceptions.ApplicationStepException('Step 4', 'Unable to complete')
+                raise exceptions.ApplicationStepException('Step 4', 'Unable to complete education')
 
-        case 'Step 5 out of 10':
+        case 'Step 5 out of 10' | 'Step 4 out of 9':
                 
             try:
                     
-                specific_questions(driver)
                 save_and_continue = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[5]/span[1]/span/span[1]/input[1]')
                 save_and_continue.click()
                     
+                time.sleep(3)
+                window = driver.current_window_handle
+                switch_to_and_apply(driver, window)
+                                        
             except Exception:
                     
                 raise exceptions.ApplicationStepException('Step 5', 'Unable to complete')
 
-        case 'Step 6 out of 10':
+        case 'Step 6 out of 10' | 'Step 5 out of 9':
                 
             try:
                     
-                specific_questions(driver)
                 save_and_continue = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[5]/span[1]/span/span[1]/input[1]')
                 save_and_continue.click()
+                    
+                time.sleep(3)
+                window = driver.current_window_handle
+                switch_to_and_apply(driver, window)
                     
             except Exception:
                     
                 raise exceptions.ApplicationStepException('Step 6', 'Unable to complete')
 
-        case 'Step 7 out of 10':
+        case 'Step 7 out of 10' | 'Step 6 out of 9':
                 
             try:
                     
-                specific_questions(driver)
                 save_and_continue = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[5]/span[1]/span/span[1]/input[1]')
                 save_and_continue.click()
+                    
+                time.sleep(3)
+                window = driver.current_window_handle
+                switch_to_and_apply(driver, window)
                     
             except Exception:
                     
                 raise exceptions.ApplicationStepException('Step 7', 'Unable to complete')
 
-        case 'Step 8 out of 10':
+        case 'Step 8 out of 10' | 'Step 7 out of 9':
                 
             try:
                     
@@ -214,52 +248,44 @@ def switch_to_and_apply(driver, window):
                 sign_signature.send_keys('Michael Ladderbush')
                 save_and_continue = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[5]/span[1]/span/span[1]/input[1]')
                 save_and_continue.click()
+                    
+                time.sleep(3)
+                window = driver.current_window_handle
+                switch_to_and_apply(driver, window)
                 
             except Exception:
                     
                 raise exceptions.ApplicationStepException('Step 8', 'Unable to complete')
 
     
-        case 'Step 9 out of 10':
+        case 'Step 9 out of 10' | 'Step 8 out of 9':
                 
             try:
                     
-                specific_questions(driver)
                 save_and_continue = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[5]/span[1]/span/span[1]/input[1]')
                 save_and_continue.click()
+                    
+                time.sleep(3)
+                window = driver.current_window_handle
+                switch_to_and_apply(driver, window)
                     
             except Exception:
                     
                 raise exceptions.ApplicationStepException('Step 9', 'Unable to complete')
-    
-        case 'Step 10 out of 10':
-                
+            
+        case 'Step 10 out of 10' | 'Step 9 out of 9':
             try:
                     
-                specific_questions(driver)
-                save_and_continue = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[5]/span[1]/span/span[1]/input[1]')
-                save_and_continue.click()
+                submit= driver.find_element(By.XPATH, '//*[@id="et-ef-content-ftf-submitCmdBottom"]')
+                submit.click()
+                time.sleep(3)
+                driver.close()
                     
             except Exception:
                     
                 raise exceptions.ApplicationStepException('Step 10', 'Unable to complete')
 
-            
-    
-            
-def specific_questions(driver):
-    #TODO
-    num = 1
-    try:
-        question_template_form = driver.find_element(By.XPATH, f'/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[4]/table/tbody/tr/td/span[4]/span[3]/fieldset[{num}]/legend/label/span[3]')
-    except:
-        print("cant find question template")
-    else:
-        if "experience and/or education" in question_template_form.text:
-            try:
-                bachelors_degree = driver.find_element(By.XPATH,"//*[text()[contain(., 'A Bachelor')]")
-            except:
-                print("can't find bachelors degree option")
-            else:
-                bachelors_degree.click()
+
+
+
         
