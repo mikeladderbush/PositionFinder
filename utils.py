@@ -38,7 +38,6 @@ def sign_in (driver):
         
      
         
-# Accept new parameter for potential XPath values.
 def set_filters(driver):
     
     try:
@@ -69,33 +68,31 @@ def set_filters(driver):
 
 
 
-# Accept new parameter for potential XPath values.
 def get_jobs(driver):
             
     try:
-        # Replace Magic variables
-        position_elements = driver.find_elements(By.TAG_NAME, 'a')    
         
+        position_elements = driver.find_elements(By.XPATH, '//li/div[2]/div[1]/span[1]/a')
+        status_elements = driver.find_elements(By.XPATH, '//li/div[3]/a')
+        complete_elements = zip(position_elements, status_elements)
+
     except Exception:
         
         raise exceptions.GetJobsException
         
     else:
         
-        for e in position_elements:
+        for title, status in complete_elements:
             
-            if("Software" in e.text or "Developer" in e.text or "Data" in e.text):
-            
-                e.send_keys(Keys.CONTROL + Keys.RETURN)
-                driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.CONTROL + Keys.TAB)
+            if("Software" in title.text or "Developer" in title.text or "Data" in title.text):
                 
-            else:
-                
-                continue
+                if("Finish Draft Submission" in status.text or "Apply" in status.text):
+                    
+                    title.send_keys(Keys.CONTROL + Keys.RETURN)
+                    driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.CONTROL + Keys.TAB)
             
 
 
-# Accept new parameter for potential XPath values.
 def switch_to_and_apply(driver, window):
     
     driver._switch_to.window(window)
