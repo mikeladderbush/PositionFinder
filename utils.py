@@ -93,22 +93,27 @@ def get_jobs(driver):
             
 
 
-def switch_to_and_apply(driver, window):
+def switch_to_and_apply(driver, window, *args):
     
     driver._switch_to.window(window)
     time.sleep(2)
-
-    try:
-        # Replace Magic variables
-        apply = driver.find_element(By.XPATH, '//*[@id="requisitionDescriptionInterface.UP_APPLY_ON_REQ.row1"]')
-        apply.click()
     
-        application_step = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[3]/span[2]/span[1]')
-        application_step_text = application_step.text
+    if args:
+        for ar in args:
+            application_step_text = ar.text
         
-    except Exception:
+    else:
+        try:
+            # Replace Magic variables
+            apply = driver.find_element(By.XPATH, '//*[@id="requisitionDescriptionInterface.UP_APPLY_ON_REQ.row1"]')
+            apply.click()
+    
+            application_step = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[3]/span[2]/span[1]')
+            application_step_text = application_step.text
         
-        raise exceptions.ApplicationStepException('application_text step', 'Application step unable to be located')
+        except Exception:
+        
+            raise exceptions.ApplicationStepException('application_text step', 'Application step unable to be located')
 
     match application_step_text:
             
@@ -135,9 +140,11 @@ def switch_to_and_apply(driver, window):
                 save_and_continue = driver.find_element(By.XPATH, '//*[@id="et-ef-content-ftf-saveContinueCmdBottom"]')
                 save_and_continue.click()
                 
+                ar = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[3]/span[2]/span[1]')
+                
                 time.sleep(3)
                 window = driver.current_window_handle
-                switch_to_and_apply(driver, window)
+                switch_to_and_apply(driver, window, ar)
                     
             except Exception:
                     
@@ -152,9 +159,11 @@ def switch_to_and_apply(driver, window):
                 save_question = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[5]/span[1]/span/span[1]/input[1]')
                 save_question.click()
                     
+                ar = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[3]/span[2]/span[1]')
+
                 time.sleep(3)
                 window = driver.current_window_handle
-                switch_to_and_apply(driver, window)
+                switch_to_and_apply(driver, window, ar)
 
             except Exception:
                     
@@ -167,10 +176,13 @@ def switch_to_and_apply(driver, window):
                 SpecificQuestions.break_down_questions(driver)
                 save_and_continue = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[5]/span[1]/span/span[1]/input[1]')
                 save_and_continue.click()
+                
+                ar = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[3]/span[2]/span[1]')
                     
                 time.sleep(3)
                 window = driver.current_window_handle
-                switch_to_and_apply(driver, window)
+                switch_to_and_apply(driver, window, ar)
+                
                     
             except Exception:
                     
@@ -184,9 +196,11 @@ def switch_to_and_apply(driver, window):
                 save_and_continue = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[5]/span[1]/span/span[1]/input[1]')
                 save_and_continue.click()
                     
+                ar = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[3]/span[2]/span[1]')
+
                 time.sleep(3)
                 window = driver.current_window_handle
-                switch_to_and_apply(driver, window)
+                switch_to_and_apply(driver, window, ar)
 
             except Exception:
                     
@@ -199,9 +213,11 @@ def switch_to_and_apply(driver, window):
                 save_and_continue = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[5]/span[1]/span/span[1]/input[1]')
                 save_and_continue.click()
                     
+                ar = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[3]/span[2]/span[1]')
+
                 time.sleep(3)
                 window = driver.current_window_handle
-                switch_to_and_apply(driver, window)
+                switch_to_and_apply(driver, window, ar)
                                         
             except Exception:
                     
@@ -214,9 +230,11 @@ def switch_to_and_apply(driver, window):
                 save_and_continue = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[5]/span[1]/span/span[1]/input[1]')
                 save_and_continue.click()
                     
+                ar = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[3]/span[2]/span[1]')
+
                 time.sleep(3)
                 window = driver.current_window_handle
-                switch_to_and_apply(driver, window)
+                switch_to_and_apply(driver, window, ar)
                     
             except Exception:
                     
@@ -229,9 +247,11 @@ def switch_to_and_apply(driver, window):
                 save_and_continue = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[5]/span[1]/span/span[1]/input[1]')
                 save_and_continue.click()
                     
+                ar = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[3]/span[2]/span[1]')
+
                 time.sleep(3)
                 window = driver.current_window_handle
-                switch_to_and_apply(driver, window)
+                switch_to_and_apply(driver, window, ar)
                     
             except Exception:
                     
@@ -246,9 +266,11 @@ def switch_to_and_apply(driver, window):
                 save_and_continue = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[5]/span[1]/span/span[1]/input[1]')
                 save_and_continue.click()
                     
+                ar = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[3]/span[2]/span[1]')
+
                 time.sleep(3)
                 window = driver.current_window_handle
-                switch_to_and_apply(driver, window)
+                switch_to_and_apply(driver, window, ar)
                 
             except Exception:
                     
@@ -262,9 +284,11 @@ def switch_to_and_apply(driver, window):
                 save_and_continue = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[5]/span[1]/span/span[1]/input[1]')
                 save_and_continue.click()
                     
+                ar = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/form/span/span[2]/span[3]/span[2]/span[1]')
+
                 time.sleep(3)
                 window = driver.current_window_handle
-                switch_to_and_apply(driver, window)
+                switch_to_and_apply(driver, window, ar)
                     
             except Exception:
                     
