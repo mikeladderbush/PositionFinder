@@ -14,15 +14,15 @@ head_page = driver.current_window_handle
 
 jobs = []
 
-time.sleep(5)
+time.sleep(2)
 
 utils.sign_in(driver)
 
-time.sleep(5)
+time.sleep(2)
 
 utils.set_filters(driver)
 
-time.sleep(5)
+time.sleep(2)
     
 utils.get_jobs(driver)
     

@@ -22,14 +22,15 @@ def break_down_questions(driver):
         print("cant find question template")
     else:
         for element in question_template_form:
-            if "experience and/or education" in element.text:
+            print(element.text)
+            if "education" in element.text:
                 try:
                     bachelors_degree = driver.find_element(By.XPATH,"//*[contains(text(),'Bachelor')]")
                 except:
                     print("can't find bachelors degree option")
                 else:
                     bachelors_degree.click()
-             
+                    
             if "data visualization tools" in element.text:
                 try:
                     one_to_three_years = driver.find_element(By.XPATH,"//*[contains(text(),'1 year')]")
