@@ -91,19 +91,21 @@ def get_jobs(driver):
                     
                     title.send_keys(Keys.CONTROL + Keys.RETURN)
                     driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.CONTROL + Keys.TAB)
-            
-    num = 2          
-    next_element = driver.find_element(By.XPATH, f'//*[@id="jobPager"]/span[2]/ul/li[{num}]')
-    num = num + 1
 
-    if next_element:
         
-        next_element.click()
+    next = driver.find_element(By.XPATH, '//*[@id="next"]')
+    
+    print(next)
+
+    next_available = next.get_attribute("aria-disabled")
+    
+    print(next_available)
+    
+    if next_available ==  "false":
+
+        next.click()
         get_jobs(driver)
         
-    else:
-        num = 2
-            
 
 
 def switch_to_and_apply(driver, window, *args):
