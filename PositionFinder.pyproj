@@ -24,7 +24,7 @@
     <Compile Include="Exceptions.py" />
     <Compile Include="PositionFinder.py" />
     <Compile Include="SpecificQuestions.py" />
-    <Compile Include="UtilTests.py" />
+    <Compile Include="UtilsTests.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />

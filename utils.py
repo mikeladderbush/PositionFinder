@@ -6,12 +6,11 @@ import time
 import SpecificQuestions
 
 
-# Accept new parameter for potential XPath values.
-# bachelors_degree = driver.find_element(By.XPATH,"//*[text()[contain(., 'A Bachelor')]")
-# search for text and then use that to determine paths, look below at software/developer search line. Optimize later
+
 def sign_in (driver):
 
     try:
+        
         sign_in = driver.find_element(By.XPATH, '//*[text()="Sign In"]')
         sign_in.click()
         time.sleep(1)
@@ -36,12 +35,12 @@ def sign_in (driver):
         
         pass
         
-     
+        
         
 def set_filters(driver):
     
     try:
-        # Replace Magic variables
+        
         location_check_box = driver.find_element(By.XPATH, '//*[@id="LOCATION-content"]/div[2]/div[3]/a/label/div')
         location_check_box.click()
         time.sleep(2)
@@ -70,7 +69,6 @@ def set_filters(driver):
 
 def get_jobs(driver):
     
-            
     try:
         
         position_elements = driver.find_elements(By.XPATH, '//li/div[2]/div[1]/span[1]/a')
@@ -119,7 +117,7 @@ def switch_to_and_apply(driver, window, *args):
         
     else:
         try:
-            # Replace Magic variables
+            
             apply = driver.find_element(By.XPATH, '//*[@id="requisitionDescriptionInterface.UP_APPLY_ON_REQ.row1"]')
             apply.click()
     

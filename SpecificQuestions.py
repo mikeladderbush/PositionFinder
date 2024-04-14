@@ -1,21 +1,10 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-
-# Accept new parameter for potential XPath values. 
-# 
-# Base questionnaire, next step is to use regex to make these more consistently able to answer
-"""
-    Job Specific Questions
- 
- 
-    Questionnaire
- 
-    Please answer the following questions as accurately as possible.
-    1. Based on your education and/or experience, which of the following requirements do you meet?
-
-"""          
+    
+    
+        
 def break_down_questions(driver):
-    # Add additional question templates based on other application questions
+    
     try:
         question_template_form = driver.find_elements(By.XPATH, '//*[@id="et-ef-content-ftf-mastercontentpanel"]/table/tbody/tr/td/span[4]/span[3]')
     except:
