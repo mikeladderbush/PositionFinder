@@ -23,12 +23,16 @@
   <ItemGroup>
     <Compile Include="Exceptions.py" />
     <Compile Include="PositionFinder.py" />
-    <Compile Include="SpecificQuestions.py" />
     <Compile Include="UtilsTests.py" />
+    <Compile Include="Websites\Mass_T\Mass_T.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />
     <Content Include="Utils.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Websites\" />
+    <Folder Include="Websites\Mass_T\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

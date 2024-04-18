@@ -3,35 +3,37 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
 import utils
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
 options = Options()
 # options.add_argument("--headless=new")
 
 driver = webdriver.Chrome(options=options)
-driver.get('https://massanf.taleo.net/careersection/ex/jobsearch.ftl')
+driver.get('https://www.google.com/')
 
 head_page = driver.current_window_handle
 
-jobs = []
+searches = []
 
-time.sleep(2)
+for search in searches:
 
-utils.sign_in(driver)
-
-time.sleep(2)
-
-utils.set_filters(driver)
-
-time.sleep(2)
+    jobs = utils.initial_search(driver, search)
     
-utils.get_jobs(driver)
-    
-child_windows = driver.window_handles
-
-time.sleep(2)
-
-for window in child_windows:
-    if(window!=head_page):
-        utils.switch_to_and_apply(driver, window)
+    for job in jobs:
         
-time.sleep(2)
+        job.send_keys(Keys.CONTROL + Keys.RETURN)
+        driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.CONTROL + Keys.TAB)
+
+    time.sleep(2)
+    
+    child_windows = driver.window_handles
+
+    time.sleep(2)
+    
+    for window in child_windows:
+        if(window!=head_page):
+            #todo: switch and start application process
+            pass
+        
+    time.sleep(2)
