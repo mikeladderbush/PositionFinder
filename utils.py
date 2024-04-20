@@ -5,17 +5,31 @@ import exceptions
 import time
 
 
-
+#initial google search, takes our driver and the search input, i.e. "Software Developer"
 def initial_search(driver, input):
     
+    #Find our google search bar, send it the input, search it, then find the job box and click it
     search_bar = driver.find_element(By.XPATH, '//*[@id="APjFqb"]')
     search_bar.send_keys(f'{input}')
-    time.sleep(2)
-    scroll_box_jobs = driver.find_elements(By.XPATH, '/html/body/div[2]/div/div[2]/div[1]/div/div/div[3]/div[1]/div[1]/div[3]/ul/li')
-    return scroll_box_jobs
+    search_bar.send_keys(Keys.ENTER)
+    scroll_box_jobs = driver.find_element(By.XPATH, '//*[@id="fMGJ3e"]/a')
+    scroll_box_jobs.click()
+    
 
 
+def set_google_filters(driver, filters):
+    
+    #create filters dictionary that contains "Location", "Date Posted", "Requirements", "Type", etc.
+    for filter in filters:
+        #this is a placeholder for when I create the dictionary
+        """if filter == "location: 30mi":
+            30miles = driver.find_element(By.XPATH, '//*[@id="choice_box_root"]/div[2]/div[2]/div[1]/div[4]/span')
+            30miles.click()"""
+        pass
+    
 
+
+#roughly finds the first present apply box, will be used once all links are open in tabs.
 def find_application (driver):
 
     try:
@@ -55,7 +69,7 @@ def find_application (driver):
         pass
         
 
-
+#sign in to speed up applying depending on types of websites like linkedIn/workday.
 def sign_in(driver, websiteType):
     
     #Need to change for different websites and emails depending on if they work

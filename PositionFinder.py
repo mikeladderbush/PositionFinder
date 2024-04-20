@@ -1,4 +1,5 @@
 
+from msilib import Control
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
@@ -14,16 +15,20 @@ driver.get('https://www.google.com/')
 
 head_page = driver.current_window_handle
 
-searches = []
+searches = ["Software Engineer Jobs"]
 
 for search in searches:
 
-    jobs = utils.initial_search(driver, search)
+    utils.initial_search(driver, search)
+            
+    #find all job boxes, loop through them opening each default application site in a new tab.
+    jobs = driver.find_elements(By.TAG_NAME, 'li')
     
     for job in jobs:
-        
-        job.send_keys(Keys.CONTROL + Keys.RETURN)
-        driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.CONTROL + Keys.TAB)
+        job.click()
+        apply_on_default_site = driver.find_element(By.XPATH, 'div[1]/div/span/div/span/a')
+        apply_on_default_site.send_keys(Keys.CONTROL + "t")
+        pass
 
     time.sleep(2)
     
