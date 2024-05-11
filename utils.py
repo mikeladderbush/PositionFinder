@@ -1,4 +1,4 @@
-from turtle import position
+from turtle import goto, position
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import exceptions
@@ -9,11 +9,20 @@ import time
 def initial_search(driver, input):
     
     #Find our google search bar, send it the input, search it, then find the job box and click it
+    time.sleep(2)
     search_bar = driver.find_element(By.XPATH, '//*[@id="APjFqb"]')
     search_bar.send_keys(f'{input}')
     search_bar.send_keys(Keys.ENTER)
-    scroll_box_jobs = driver.find_element(By.XPATH, '//*[@id="fMGJ3e"]/a')
-    scroll_box_jobs.click()
+    time.sleep(10)
+    broken_link = True
+    while broken_link == True:
+        try:
+            scroll_box_jobs = driver.find_element(By.XPATH, '//*[@id="fMGJ3e"]/a')
+        except:
+            driver.refresh()
+        else:
+            scroll_box_jobs.click()
+            broken_link = False
     
 
 

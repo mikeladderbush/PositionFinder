@@ -6,6 +6,7 @@ import time
 import utils
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+import Websites.Site_Parser
 
 options = Options()
 # options.add_argument("--headless=new")
@@ -26,19 +27,23 @@ for search in searches:
     
     for job in jobs:
         job.click()
-        apply_on_default_site = driver.find_element(By.XPATH, 'div[1]/div/span/div/span/a')
-        apply_on_default_site.send_keys(Keys.CONTROL + "t")
+        time.sleep(2)
+        apply_on_default_site = driver.find_element(By.XPATH, "/html/body/div[2]/div/div[2]/div[1]/div/div/div[3]/div[2]/div/div[1]/div/div/g-scrolling-carousel/div[1]/div/span/div/span[1]/a")
+        apply_on_default_site.click()
         pass
 
     time.sleep(2)
     
-    child_windows = driver.window_handles
+    original_window = driver.current_window_handle
 
     time.sleep(2)
     
-    for window in child_windows:
-        if(window!=head_page):
+    for window in driver.window_handles:
+        if window != original_window:
             #todo: switch and start application process
+            driver.switch_to.window(window)
+            site_type = Websites.Site_Parser.site_determination(driver)
             pass
+        
         
     time.sleep(2)

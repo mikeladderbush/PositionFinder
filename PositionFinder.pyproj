@@ -24,7 +24,13 @@
     <Compile Include="Exceptions.py" />
     <Compile Include="PositionFinder.py" />
     <Compile Include="UtilsTests.py" />
+    <Compile Include="Websites\Generic\Generic_Careers.py" />
+    <Compile Include="Websites\Glassdoor\Glassdoor.py" />
+    <Compile Include="Websites\LinkedIn\LinkedIn.py" />
     <Compile Include="Websites\Mass_T\Mass_T.py" />
+    <Compile Include="Websites\Site_Parser.py" />
+    <Compile Include="Websites\Workday\Workday.py" />
+    <Compile Include="Websites\Zip_Recruiter\Zip_Recruiter.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />
@@ -33,6 +39,11 @@
   <ItemGroup>
     <Folder Include="Websites\" />
     <Folder Include="Websites\Mass_T\" />
+    <Folder Include="Websites\LinkedIn\" />
+    <Folder Include="Websites\Generic\" />
+    <Folder Include="Websites\Glassdoor\" />
+    <Folder Include="Websites\Workday\" />
+    <Folder Include="Websites\Zip_Recruiter\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
